@@ -61,6 +61,17 @@
     /* Ẩn nút bấm gốc của Google */
     #google_translate_element { display: none; }
 
+    /* ============================================== */
+    /* === BẮT ĐẦU SỬA LỖI BỊ CHE KHUẤT === */
+    /* ============================================== */
+    /* Ghi đè 'overflow: hidden' của thẻ cha để cho phép menu trồi ra ngoài */
+    .top_header.overflow, .top_right.overflow {
+        overflow: visible;
+    }
+    /* ============================================== */
+    /* === KẾT THÚC SỬA LỖI BỊ CHE KHUẤT === */
+    /* ============================================== */
+
     /* CSS cho nút bấm tùy chỉnh của chúng ta */
     .lang-switcher {
         position: relative;
@@ -286,7 +297,7 @@
         <?php } ?>
 
         <?php if(Session::get("userLevel") == 3){ ?>
-        <div class="property_dropdown overflow" id="dashboardNav">
+            <div class="property_dropdown overflow" id="dashboardNav">
                 <ul>
                     <li><a href="Admin/dashboard_agent.php"><i class="fa-solid fa-chart-line"></i><span>dashboard</span></a></li>
                     
