@@ -62,14 +62,20 @@
     #google_translate_element { display: none; }
 
     /* ============================================== */
-    /* === BẮT ĐẦU SỬA LỖI BỊ CHE KHUẤT === */
+    /* === BẮT ĐẦU SỬA LỖI (BỊ CHE + SẬP HEADER) === */
     /* ============================================== */
-    /* Ghi đè 'overflow: hidden' của thẻ cha để cho phép menu trồi ra ngoài */
+    /* 1. Ghi đè 'overflow: hidden' để cho phép menu trồi ra ngoài */
     .top_header.overflow, .top_right.overflow {
         overflow: visible;
     }
+    /* 2. Bổ sung clearfix hack mới để ngăn .top_header bị sập (lỗi mới) */
+    .top_header::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
     /* ============================================== */
-    /* === KẾT THÚC SỬA LỖI BỊ CHE KHUẤT === */
+    /* === KẾT THÚC SỬA LỖI === */
     /* ============================================== */
 
     /* CSS cho nút bấm tùy chỉnh của chúng ta */
@@ -115,7 +121,7 @@
     .lang-switcher .lang-dropdown a:hover {
         background-color: #f5f5f5;
     }
-    .lang-switcher .lang-dropdown.lang-switcher-show { /* Lớp JavaScript dùng để Hiện */
+    .lang-switcher .lang-dropdown.lang-switcher-show { /* Lớp JavaScript dùng để Hiện (bạn đã tự sửa) */
         display: block;
     }
 </style>
@@ -141,7 +147,7 @@
       location.reload();
     }
 
-    // Đóng menu nếu bấm ra ngoài (ĐÃ SỬA LỖI)
+    // Đóng menu nếu bấm ra ngoài
     window.onclick = function(event) {
       // Dùng .closest() để kiểm tra xem có bấm vào nút (HOẶC BẤT CỨ THỨ GÌ BÊN TRONG NÚT) hay không
       if (!event.target.closest('.lang-button')) {
