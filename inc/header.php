@@ -104,7 +104,7 @@
     .lang-switcher .lang-dropdown a:hover {
         background-color: #f5f5f5;
     }
-    .lang-switcher-show { /* Lớp JavaScript dùng để Hiện */
+    .lang-switcher .lang-dropdown.lang-switcher-show { /* Lớp JavaScript dùng để Hiện */
         display: block;
     }
 </style>
