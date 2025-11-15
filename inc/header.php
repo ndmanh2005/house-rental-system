@@ -37,7 +37,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="keywords" content="house rental system, system, house">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="author" content="Nguyễn Đồng Minh Anh"> <title>
+    <meta name="author" content="Nguyễn Đồng Minh Anh">
+    <title>
         <?php echo $fm->title()." - ".TITLE; ?>
     </title>
 <link rel="stylesheet" type="text/css" href="css/fontawesome/css/all.min.css"/>
@@ -125,14 +126,14 @@
 
     // Hàm để đổi ngôn ngữ (set cookie và tải lại)
     function changeLanguage(lang) {
-      // /en/ là ngôn ngữ gốc, /lang/ là ngôn ngữ đích
       document.cookie = "googtrans=/en/" + lang + ";path=/";
       location.reload();
     }
 
-    // Đóng menu nếu bấm ra ngoài
+    // Đóng menu nếu bấm ra ngoài (ĐÃ SỬA LỖI)
     window.onclick = function(event) {
-      if (!event.target.matches('.lang-button')) {
+      // Dùng .closest() để kiểm tra xem có bấm vào nút (HOẶC BẤT CỨ THỨ GÌ BÊN TRONG NÚT) hay không
+      if (!event.target.closest('.lang-button')) {
         var dropdowns = document.getElementsByClassName("lang-dropdown");
         for (var i = 0; i < dropdowns.length; i++) {
           var openDropdown = dropdowns[i];
