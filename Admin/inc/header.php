@@ -72,13 +72,13 @@ if(isset($_GET['action']) && $_GET['action'] == "logout"){
 				<ul>
 					<li>
 						<p>
-							<i class="fa-solid fa-phone"></i><span>Phone: +8801734530981</span>
+							<i class="fa-solid fa-phone"></i><span>Phone: +84976068059</span>
 						</p>
 					</li>
 					<li>
 						<p>
 							<i class="fa-solid fa-envelope"></i>
-							</i><span>Email: info@rentinghome.com</span>
+							</i><span>Email: info@minhanh.com</span>
 						</p>
 					</li>
 				</ul>
