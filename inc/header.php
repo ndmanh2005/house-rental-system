@@ -37,7 +37,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="keywords" content="house rental system, system, house">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="author" content="Munaim Khan"> <title>
+    <meta name="author" content="Nguyễn Đồng Minh Anh"> <title>
         <?php echo $fm->title()." - ".TITLE; ?>
     </title>
 <link rel="stylesheet" type="text/css" href="css/fontawesome/css/all.min.css"/>
@@ -50,16 +50,100 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en', // Ngôn ngữ gốc của trang
-    includedLanguages: 'en,ja', // Các ngôn ngữ cho phép: Anh, Nhật
-    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-  }, 'google_translate_element');
-}
-</script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<style>
+    /* Ẩn thanh Google Translate bar ở trên cùng */
+    body { top: 0px !important; }
+    .goog-te-banner-frame { display: none !important; }
+
+    /* Ẩn nút bấm gốc của Google */
+    #google_translate_element { display: none; }
+
+    /* CSS cho nút bấm tùy chỉnh của chúng ta */
+    .lang-switcher {
+        position: relative;
+        display: inline-block;
+        margin-left: 15px;
+        vertical-align: middle;
+        font-family: Arial, sans-serif;
+    }
+    .lang-switcher .lang-button {
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+        border-radius: 4px;
+    }
+    .lang-switcher .lang-button i {
+        margin-left: 5px;
+    }
+    .lang-switcher .lang-dropdown {
+        display: none; /* Ẩn mặc định */
+        position: absolute;
+        right: 0;
+        top: 100%;
+        margin-top: 5px;
+        background-color: white;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        min-width: 140px;
+        z-index: 1000;
+        border-radius: 5px;
+    }
+    .lang-switcher .lang-dropdown a {
+        color: black;
+        padding: 10px 15px;
+        text-decoration: none;
+        display: block;
+        font-size: 14px;
+    }
+    .lang-switcher .lang-dropdown a:hover {
+        background-color: #f5f5f5;
+    }
+    .lang-switcher-show { /* Lớp JavaScript dùng để Hiện */
+        display: block;
+    }
+</style>
+
+<script type="text/javascript">
+    // Hàm này phải được giữ nguyên tên
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en', // Ngôn ngữ gốc của trang
+        includedLanguages: 'en,ja', // Các ngôn ngữ cho phép
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+
+    // Hàm để hiện/ẩn menu
+    function toggleLangDropdown() {
+      document.getElementById("myLangDropdown").classList.toggle("lang-switcher-show");
+    }
+
+    // Hàm để đổi ngôn ngữ (set cookie và tải lại)
+    function changeLanguage(lang) {
+      // /en/ là ngôn ngữ gốc, /lang/ là ngôn ngữ đích
+      document.cookie = "googtrans=/en/" + lang + ";path=/";
+      location.reload();
+    }
+
+    // Đóng menu nếu bấm ra ngoài
+    window.onclick = function(event) {
+      if (!event.target.matches('.lang-button')) {
+        var dropdowns = document.getElementsByClassName("lang-dropdown");
+        for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('lang-switcher-show')) {
+            openDropdown.classList.remove('lang-switcher-show');
+          }
+        }
+      }
+    }
+</script>
+
 <link rel="stylesheet" type="text/css" href="mystyle.css"/>
 </head>
 
@@ -83,11 +167,7 @@ function googleTranslateElementInit() {
                             
                         </p>
                     </li>
-                    
-                    <li style="padding-left: 15px;">
-                        <div id="google_translate_element" style="display: inline-block; vertical-align: middle;"></div>
-                    </li>
-                    </ul>
+                </ul>
             </div>
         </div>
         
@@ -106,7 +186,26 @@ function googleTranslateElementInit() {
             <div class="users_name">
                 <p><?php echo Session::get("userFName")." ".Session::get("userLName");?></p>
             </div>
-        <?php } ?>
+
+            <div class="lang-switcher">
+                <button onclick="toggleLangDropdown()" class="lang-button">
+                    <?php
+                        // Đọc cookie để biết ngôn ngữ hiện tại
+                        $currentLang = "English"; // Mặc định
+                        if(isset($_COOKIE['googtrans']) && $_COOKIE['googtrans'] == '/en/ja') {
+                            $currentLang = "日本語";
+                        }
+                    ?>
+                    <?php echo $currentLang; ?>
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+                
+                <div id="myLangDropdown" class="lang-dropdown">
+                    <a href="javascript:void(0)" onclick="changeLanguage('en')">English</a>
+                    <a href="javascript:void(0)" onclick="changeLanguage('ja')">日本語</a>
+                </div>
+            </div>
+            <?php } ?>
         </div>
     </div>
     
@@ -263,3 +362,7 @@ function googleTranslateElementInit() {
     <?php } ?>
       </ul>
     </nav>
+<div id="google_translate_element" style="display:none;"></div>
+
+</body>
+</html>
