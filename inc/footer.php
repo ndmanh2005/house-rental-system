@@ -11,7 +11,7 @@
 						</div>
 						<div class="text_body">
 							<h3>address</h3>
-							<p>Dhanmondi, Dhaka</p>
+							<p>Hanoi, Viet Nam</p>
 						</div>
 					</div>
 					
@@ -21,7 +21,7 @@
 						</div>
 						<div class="text_body">
 							<h3>for any question</h3>
-							<p>houserental@gmail.com</p>
+							<p>minhanh.hv2512@gmail.com</p>
 						</div>
 					</div>
 					
@@ -31,7 +31,7 @@
 						</div>
 						<div class="text_body">
 							<h3>help & support</h3>
-							<p>01232-231324</p>
+							<p>0976068059</p>
 						</div>
 					</div>
 				</div>
@@ -88,7 +88,7 @@
 		</div>
 		
 		<div class="footer-bottom">
-			<p>&copy; 2022. All Rights Reserved</p>
+			<p>&copy; 2025. All Rights Reserved</p>
 		</div>
 	</footer>
 <!--Footer Section End------------->
